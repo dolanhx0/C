@@ -1,2 +1,2 @@
 #include <stdio.h>
-int main(){printf("Hello GitHub!\n");}
+int main(){printf("Xin chào GitHub!\n");}
