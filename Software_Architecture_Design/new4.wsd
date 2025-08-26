@@ -1,0 +1,100 @@
+@startuml
+!define RECTANGLE class
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam class {
+    BackgroundColor #E6F3FF
+    BorderColor #0066CC
+    ArrowColor #0066CC
+}
+
+skinparam note {
+    BackgroundColor #FFFFCC
+    BorderColor #CCCC00
+}
+
+title RoadMate System Context Diagram
+
+RECTANGLE "Vehicle Owner\n(User)" as User {
+    - Motorbike riders
+    - Car drivers  
+    - Truck drivers
+    - Tourists/travelers
+}
+
+RECTANGLE "Service Provider" as Provider {
+    - Motorbike repair shops
+    - Car garages
+    - Professional rescue teams
+    - Individual technicians
+}
+
+RECTANGLE "System Administrator" as Admin {
+    - Manage user accounts
+    - Monitor system performance
+    - Handle customer support
+}
+
+package "RoadMate System" as System {
+    RECTANGLE "Mobile Application\n(Android/iOS)" as MobileApp
+    RECTANGLE "Backend Server\n(Node.js/Express)" as Backend
+    RECTANGLE "PostgreSQL Database\nwith PostGIS" as Database
+}
+
+RECTANGLE "Map Service\n(Google Maps API)" as MapAPI {
+    - Location services
+    - Route optimization
+    - Real-time traffic
+}
+
+RECTANGLE "Payment Gateway" as PaymentGW {
+    - E-wallets
+    - Bank cards
+    - Transaction processing
+}
+
+RECTANGLE "Push Notification\nService" as NotificationService {
+    - Firebase Cloud Messaging
+    - Apple Push Notification
+}
+
+RECTANGLE "SMS/Email Service" as SMSEmail {
+    - OTP verification
+    - Password recovery
+    - Notifications
+}
+
+' User interactions
+User --> System : "1. Register/Login with credentials\n2. Send rescue request with location & vehicle type\n3. Select service provider\n4. Track service progress\n5. Make payment\n6. Rate and provide feedback"
+
+System --> User : "1. Account confirmation\n2. List of available service providers\n3. Real-time location tracking\n4. Service status updates\n5. Payment confirmation\n6. Service completion notification"
+
+' Service Provider interactions  
+Provider --> System : "1. Register as service provider\n2. Update availability status\n3. Accept/decline rescue requests\n4. Update service progress\n5. Complete service"
+
+System --> Provider : "1. Registration confirmation\n2. New rescue request notifications\n3. User location and contact details\n4. Payment confirmation\n5. Customer ratings and feedback"
+
+' Administrator interactions
+Admin --> System : "1. Monitor system performance\n2. Manage user/provider accounts\n3. Handle disputes\n4. Generate reports\n5. System maintenance"
+
+System --> Admin : "1. System status reports\n2. User activity analytics\n3. Performance metrics\n4. Error logs and alerts"
+
+' External system integrations
+System --> MapAPI : "1. Request location coordinates\n2. Calculate distances\n3. Get route information\n4. Real-time traffic updates"
+
+MapAPI --> System : "1. GPS coordinates\n2. Distance calculations\n3. Optimized routes\n4. Traffic conditions"
+
+System --> PaymentGW : "1. Process payment requests\n2. Verify payment status\n3. Handle refunds"
+
+PaymentGW --> System : "1. Payment confirmation\n2. Transaction receipts\n3. Payment status updates\n4. Refund confirmations"
+
+System --> NotificationService : "1. Send push notifications\n2. Delivery status requests"
+
+NotificationService --> System : "1. Notification delivery confirmation\n2. Device registration tokens"
+
+System --> SMSEmail : "1. Send OTP codes\n2. Send password recovery emails\n3. Send service notifications"
+
+SMSEmail --> System : "1. Delivery confirmations\n2. Bounce notifications"
+
+@enduml

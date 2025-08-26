@@ -1,0 +1,80 @@
+@startuml EcoMind System Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title EcoMind System Context Diagram
+
+Person(user, "End Users", "Individuals seeking self-development and environmental protection:\n• Students and professionals\n• Environment-conscious individuals\n• Gamification enthusiasts\n• Productivity seekers")
+
+Person(admin, "System Administrator", "Manages system configuration,\nuser accounts, and content moderation")
+
+Person(content_creator, "Content Creator", "Creates educational content,\narticles, and sustainability tips")
+
+System_Boundary(ecomind_boundary, "EcoMind System") {
+    System(ecomind, "EcoMind Mobile Application", "Comprehensive mobile app for habit tracking,\nenvironmental awareness, gamification,\nand community engagement")
+}
+
+System_Ext(push_service, "Push Notification Service", "Sends notifications for reminders,\ncommunity updates, and achievements")
+
+System_Ext(cloud_storage, "Cloud Storage Service", "Stores user data, images, videos,\nand application backups")
+
+System_Ext(social_media, "Social Media Platforms", "Facebook, Google, Apple for\nsocial login authentication")
+
+System_Ext(env_data_api, "Environmental Data APIs", "Provides data for calculating\nCO2 reduction, water savings,\nand environmental impact metrics")
+
+System_Ext(payment_gateway, "Payment Gateway", "Processes payments for premium features\nand real-world environmental contributions")
+
+System_Ext(env_organizations, "Environmental Organizations", "Partner organizations for\nreal-world tree planting and\nenvironmental projects")
+
+System_Ext(analytics_service, "Analytics Service", "Collects usage statistics\nand user behavior data")
+
+System_Ext(email_service, "Email Service", "Sends verification emails,\npassword reset, and notifications")
+
+' User interactions
+Rel(user, ecomind, "Uses mobile app for:\n• Creating and tracking habits\n• Managing daily tasks and to-dos\n• Participating in challenges\n• Viewing environmental impact\n• Engaging with community\n• Accessing educational content", "HTTPS/Mobile App")
+
+Rel(ecomind, user, "Provides:\n• Personalized recommendations\n• Progress tracking and reports\n• Gamification rewards\n• Community content feed\n• Educational materials", "Push Notifications, In-App")
+
+' Admin interactions
+Rel(admin, ecomind, "Manages:\n• User accounts and roles\n• System configuration\n• Content moderation\n• Challenge creation", "HTTPS/Admin Panel")
+
+Rel(ecomind, admin, "Provides:\n• System metrics and reports\n• User activity analytics\n• Content flagging alerts", "Admin Dashboard")
+
+' Content Creator interactions
+Rel(content_creator, ecomind, "Contributes:\n• Educational articles\n• Sustainability tips\n• Challenge content\n• News updates", "HTTPS/Content Management")
+
+Rel(ecomind, content_creator, "Provides:\n• Content management tools\n• Publishing platform\n• Engagement metrics", "Content Dashboard")
+
+' External system interactions
+Rel(ecomind, push_service, "Sends notification requests for:\n• Habit reminders\n• Community updates\n• Achievement notifications\n• Challenge deadlines", "HTTPS/API")
+
+Rel(push_service, user, "Delivers push notifications", "Mobile Push")
+
+Rel(ecomind, cloud_storage, "Stores and retrieves:\n• User profile images\n• Community posts and media\n• Application backups\n• Educational content", "HTTPS/API")
+
+Rel(ecomind, social_media, "Authenticates users via:\n• Google OAuth\n• Facebook Login\n• Apple ID", "HTTPS/OAuth")
+
+Rel(social_media, ecomind, "Returns user authentication\nand basic profile information", "OAuth Response")
+
+Rel(ecomind, env_data_api, "Queries for:\n• Environmental impact calculations\n• CO2 emission factors\n• Water usage metrics\n• Sustainability benchmarks", "HTTPS/API")
+
+Rel(env_data_api, ecomind, "Provides environmental\ndata and metrics", "JSON/HTTPS")
+
+Rel(ecomind, payment_gateway, "Processes:\n• Premium subscription payments\n• Environmental contribution donations\n• In-app purchases", "HTTPS/API")
+
+Rel(payment_gateway, ecomind, "Returns payment status\nand transaction details", "Webhook/HTTPS")
+
+Rel(ecomind, env_organizations, "Coordinates:\n• Real-world tree planting\n• Environmental project funding\n• Impact verification\n• Partnership activities", "HTTPS/API")
+
+Rel(env_organizations, ecomind, "Provides:\n• Project updates\n• Impact verification\n• Real-world contribution proof", "API Response")
+
+Rel(ecomind, analytics_service, "Sends:\n• User behavior data\n• Feature usage statistics\n• Performance metrics\n• Error logs", "HTTPS/API")
+
+Rel(analytics_service, ecomind, "Provides:\n• Usage analytics\n• Performance insights\n• User engagement reports", "Dashboard/API")
+
+Rel(ecomind, email_service, "Sends email requests for:\n• Account verification\n• Password reset\n• Weekly/monthly reports\n• Important notifications", "SMTP/API")
+
+Rel(email_service, user, "Delivers emails", "Email")
+
+SHOW_LEGEND()
+
+@enduml

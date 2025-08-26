@@ -1,0 +1,61 @@
+@startuml RoadMate_System_Context_Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title RoadMate System Context Diagram
+
+Person(end_users, "End Users", "Vehicle operators seeking emergency rescue services and travelers needing roadside assistance • Motorcycle riders • Car drivers • Truck drivers • Tourists and long-distance travelers")
+
+Person(service_providers, "Service Providers", "Professional rescue service providers and repair specialists • Motorcycle repair shops • Car garages • Truck rescue teams • Individual service technicians")
+
+Person(system_admin, "System Administrator", "Manages system operations and service quality • System configuration • User account management • Service provider verification • Content moderation")
+
+System(roadmate_system, "RoadMate Mobile Application", "Comprehensive mobile app for emergency vehicle rescue services providing user management, rescue request coordination, real-time tracking, and service provider network")
+
+System_Ext(map_services, "Map Services", "Provides GPS location services and navigation • Real-time GPS tracking • Route optimization • Location-based service provider search • Navigation assistance")
+
+System_Ext(payment_gateway, "Payment Gateway", "Processes secure online payments for rescue services • Electronic wallet integration • Bank card processing • Transaction management • Payment security")
+
+System_Ext(push_notification, "Push Notification Service", "Sends real-time notifications and alerts • Emergency request notifications • Service status updates • Provider availability alerts • System announcements")
+
+System_Ext(cloud_storage, "Cloud Storage Service", "Stores application data and user information • User profiles and history • Service provider data • Transaction records • Application backups • Media files")
+
+System_Ext(email_service, "Email Service", "Sends verification and notification emails • Account verification • Password reset • Service confirmations • Important notifications")
+
+' End Users interactions
+Rel(end_users, roadmate_system, "Uses mobile app for:\n• Account registration and management\n• Emergency rescue requests\n• Service provider selection\n• Real-time service tracking\n• Payment processing\n• Service rating and feedback", "HTTPS/API")
+
+Rel(roadmate_system, end_users, "Provides:\n• Emergency rescue coordination\n• Real-time service updates\n• Service provider information\n• Location tracking\n• Service history\n• Notifications")
+
+' Service Providers interactions
+Rel(service_providers, roadmate_system, "Uses provider app for:\n• Provider registration\n• Service request acceptance\n• Status updates\n• Location sharing\n• Service management\n• Revenue tracking", "HTTPS/API")
+
+Rel(roadmate_system, service_providers, "Provides:\n• New rescue requests\n• Customer location data\n• Service coordination\n• Payment processing\n• Performance analytics\n• Business management tools")
+
+' System Administrator interactions
+Rel(system_admin, roadmate_system, "Manages:\n• System configuration\n• User account oversight\n• Service provider verification\n• Quality control\n• System monitoring\n• Content moderation", "Admin Dashboard")
+
+Rel(roadmate_system, system_admin, "Provides:\n• System analytics\n• User activity reports\n• Service quality metrics\n• Performance monitoring\n• Security alerts\n• Management dashboard")
+
+' External Systems interactions
+Rel(roadmate_system, map_services, "Requests:\n• GPS location services\n• Route calculation\n• Map data\n• Navigation guidance\n• Location-based searches", "API/SDK")
+
+Rel(map_services, roadmate_system, "Returns:\n• User location data\n• Service provider locations\n• Route information\n• Map visualization\n• Traffic conditions\n• Distance calculations")
+
+Rel(roadmate_system, payment_gateway, "Sends:\n• Payment processing requests\n• Transaction data\n• User payment information\n• Service cost calculations", "Secure API")
+
+Rel(payment_gateway, roadmate_system, "Returns:\n• Payment confirmation\n• Transaction status\n• Payment receipts\n• Billing information\n• Security validation")
+
+Rel(roadmate_system, push_notification, "Sends:\n• Notification requests\n• User targeting data\n• Message content\n• Delivery preferences\n• Emergency alerts", "API")
+
+Rel(push_notification, roadmate_system, "Delivers:\n• Push notifications\n• Delivery confirmations\n• User engagement data\n• Notification analytics")
+
+Rel(roadmate_system, cloud_storage, "Stores:\n• User profiles and data\n• Service history\n• Provider information\n• Transaction records\n• Application files\n• Backup data", "Cloud API")
+
+Rel(cloud_storage, roadmate_system, "Provides:\n• Data retrieval\n• File storage\n• Backup services\n• Data synchronization\n• Storage analytics")
+
+Rel(roadmate_system, email_service, "Sends:\n• Email requests\n• Verification codes\n• Password reset links\n• Service notifications\n• Important alerts", "SMTP/API")
+
+Rel(email_service, roadmate_system, "Delivers:\n• Email confirmations\n• Delivery status\n• Bounce notifications\n• Email analytics")
+
+SHOW_LEGEND()
+@enduml

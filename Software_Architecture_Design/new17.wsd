@@ -1,0 +1,89 @@
+@startuml
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 12
+skinparam actorFontSize 12
+skinparam packageFontSize 14
+skinparam rectangleFontSize 12
+
+title RoadMate System Context Diagram
+
+' Define the main system
+rectangle "RoadMate System" as RoadMate {
+  rectangle "Mobile Application\n(Flutter - Android/iOS)" as MobileApp
+  rectangle "Backend Server\n(Node.js/Express.js)" as Backend
+  rectangle "Database\n(PostgreSQL)" as Database
+}
+
+' Define external actors
+actor "Vehicle Owner\n(Motorbike/Car/Truck)" as VehicleOwner
+actor "Service Provider\n(Repair Shop/Technician)" as ServiceProvider
+actor "System Administrator" as Admin
+
+' Define external systems
+cloud "Map Services\n(Google Maps API)" as MapAPI
+cloud "Push Notification\nService" as NotificationService
+cloud "Payment Gateway\n(E-wallets/Banks)" as PaymentGateway
+cloud "SMS/Email Service" as CommunicationService
+cloud "Cloud Platform\n(AWS/GCP/Azure)" as CloudPlatform
+
+' Vehicle Owner interactions
+VehicleOwner --> RoadMate : "Registration, Login\nPersonal Profile Management\nPassword Recovery"
+VehicleOwner --> RoadMate : "Emergency Rescue Request\n(Location, Vehicle Type, Problem Description)"
+VehicleOwner --> RoadMate : "Select Service Provider\n(Based on Distance, Rating, Price)"
+VehicleOwner --> RoadMate : "Track Service Progress\n(Real-time Location Updates)"
+VehicleOwner --> RoadMate : "Rate and Review Service\n(1-5 Stars, Written Feedback)"
+VehicleOwner --> RoadMate : "View Service History\n(Past Requests, Payments, Providers)"
+VehicleOwner --> RoadMate : "Make Payment\n(Online Payment Methods)"
+VehicleOwner --> RoadMate : "Cancel Request\n(Before Provider Arrival)"
+
+RoadMate --> VehicleOwner : "Account Confirmation\nProfile Information"
+RoadMate --> VehicleOwner : "Available Service Providers\n(List with Details, Distance, ETA)"
+RoadMate --> VehicleOwner : "Service Status Updates\n(On the way, Arrived, Completed)"
+RoadMate --> VehicleOwner : "Real-time Provider Location\n(Map Display)"
+RoadMate --> VehicleOwner : "Service Cost Estimate\nPayment Confirmation"
+RoadMate --> VehicleOwner : "Service History Reports\nTransaction Records"
+RoadMate --> VehicleOwner : "Push Notifications\n(Status Updates, Promotions)"
+
+' Service Provider interactions
+ServiceProvider --> RoadMate : "Provider Registration\nProfile Management"
+ServiceProvider --> RoadMate : "Service Area Definition\nWorking Hours Setup"
+ServiceProvider --> RoadMate : "Accept/Decline Requests\nAvailability Status Updates"
+ServiceProvider --> RoadMate : "Update Service Status\n(On the way, Arrived, Working, Completed)"
+ServiceProvider --> RoadMate : "Location Updates\n(Real-time GPS Tracking)"
+ServiceProvider --> RoadMate : "Service Pricing Information\nSpecialty Services"
+
+RoadMate --> ServiceProvider : "Rescue Request Notifications\n(Location, Vehicle Type, Problem)"
+RoadMate --> ServiceProvider : "Customer Contact Information\nSpecial Instructions"
+RoadMate --> ServiceProvider : "Revenue Reports\nTransaction History"
+RoadMate --> ServiceProvider : "Customer Ratings and Reviews\nFeedback"
+RoadMate --> ServiceProvider : "Payment Processing\nCommission Details"
+
+' System Administrator interactions
+Admin --> RoadMate : "System Configuration\nUser Management"
+Admin --> RoadMate : "Monitor System Performance\nDatabase Maintenance"
+Admin --> RoadMate : "Manage Service Provider Verification\nQuality Control"
+Admin --> RoadMate : "Generate Analytics Reports\nSystem Health Monitoring"
+
+RoadMate --> Admin : "System Status Reports\nPerformance Metrics"
+RoadMate --> Admin : "User Activity Logs\nTransaction Records"
+RoadMate --> Admin : "Error Reports\nSecurity Alerts"
+RoadMate --> Admin : "Revenue Analytics\nService Usage Statistics"
+
+' External system interactions
+RoadMate --> MapAPI : "Location Requests\nRoute Calculation"
+MapAPI --> RoadMate : "Geographic Data\nMap Display, Directions"
+
+RoadMate --> NotificationService : "Push Notification Requests\n(Status Updates, Alerts)"
+NotificationService --> RoadMate : "Delivery Confirmations\nNotification Status"
+
+RoadMate --> PaymentGateway : "Payment Processing Requests\nTransaction Data"
+PaymentGateway --> RoadMate : "Payment Confirmation\nTransaction Results"
+
+RoadMate --> CommunicationService : "SMS/Email Requests\n(Verification, Notifications)"
+CommunicationService --> RoadMate : "Delivery Status\nMessage Confirmations"
+
+RoadMate --> CloudPlatform : "Application Deployment\nData Storage, Backup"
+CloudPlatform --> RoadMate : "Infrastructure Services\nScaling, Security"
+
+@enduml

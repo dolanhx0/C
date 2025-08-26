@@ -1,0 +1,111 @@
+@startuml RoadMate_System_Context_Diagram
+
+!define RECTANGLE class
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontSize 10
+skinparam actorStyle awesome
+
+title RoadMate System Context Diagram
+
+actor "Vehicle Users\n(Motorbike, Car, Truck Drivers)" as Users
+actor "Service Providers\n(Repair Shops, Rescue Teams)" as Providers
+actor "System Administrator" as Admin
+actor "Payment Gateway\n(E-wallets, Banks)" as Payment
+actor "Map Service Provider\n(Google Maps API)" as MapAPI
+actor "SMS/Email Service" as NotificationService
+actor "Cloud Storage Service" as CloudStorage
+
+package "RoadMate System" as RoadMate {
+  [Mobile Application\n(Android/iOS)]
+  [Backend Server\n(Node.js/Express.js)]
+  [PostgreSQL Database]
+  [Push Notification System]
+}
+
+Users --> RoadMate : Registration, Login,\nPersonal Profile Management,\nPassword Recovery
+Users --> RoadMate : Emergency Rescue Requests\n(Location, Vehicle Type, Problem Description)
+Users --> RoadMate : Select Service Provider,\nTrack Service Progress
+Users --> RoadMate : Rate and Review Services,\nView Service History
+Users --> RoadMate : Cancel Rescue Requests,\nPayment Processing
+
+RoadMate --> Users : User Authentication,\nAccount Management Responses
+RoadMate --> Users : Display Available Service Providers\n(Distance, Ratings, Estimated Arrival)
+RoadMate --> Users : Real-time Service Provider Location,\nStatus Updates
+RoadMate --> Users : Service Completion Notifications,\nPayment Confirmations
+RoadMate --> Users : Push Notifications\n(Request Status, Promotions)
+
+Providers --> RoadMate : Registration, Profile Management,\nService Area Configuration
+Providers --> RoadMate : Receive Rescue Requests,\nAccept/Decline Requests
+Providers --> RoadMate : Update Service Status\n(On the way, Arrived, Completed)
+Providers --> RoadMate : Manage Availability Status,\nView Request History
+Providers --> RoadMate : Revenue Reports,\nTransaction History
+
+RoadMate --> Providers : Service Provider Authentication,\nProfile Management
+RoadMate --> Providers : New Rescue Request Notifications\n(User Location, Problem Details)
+RoadMate --> Providers : User Contact Information,\nNavigation Details
+RoadMate --> Providers : Payment Processing,\nRevenue Tracking
+RoadMate --> Providers : Performance Analytics,\nRating Feedback
+
+Admin --> RoadMate : System Configuration,\nUser Management
+Admin --> RoadMate : Service Provider Verification,\nQuality Control
+Admin --> RoadMate : Monitor System Performance,\nGenerate Reports
+Admin --> RoadMate : Content Management,\nSecurity Updates
+
+RoadMate --> Admin : System Status Reports,\nUser Analytics
+RoadMate --> Admin : Service Provider Data,\nVerification Results
+RoadMate --> Admin : Performance Metrics,\nError Logs
+RoadMate --> Admin : Security Alerts,\nSystem Health Status
+
+RoadMate --> Payment : Payment Processing Requests\n(Amount, User Details, Transaction ID)
+RoadMate --> Payment : Payment Verification,\nRefund Requests
+
+Payment --> RoadMate : Payment Confirmation,\nTransaction Status
+Payment --> RoadMate : Payment Success/Failure,\nRefund Status
+
+RoadMate --> MapAPI : Location Services,\nGeocoding Requests
+RoadMate --> MapAPI : Route Calculation,\nReal-time Navigation
+RoadMate --> MapAPI : Distance Calculation,\nMap Display Data
+
+MapAPI --> RoadMate : Location Coordinates,\nAddress Information
+MapAPI --> RoadMate : Route Data,\nTraffic Information
+MapAPI --> RoadMate : Map Images,\nNavigation Instructions
+
+RoadMate --> NotificationService : SMS/Email Requests\n(Verification Codes, Notifications)
+RoadMate --> NotificationService : Password Recovery,\nAccount Alerts
+
+NotificationService --> RoadMate : Delivery Status,\nSending Confirmation
+NotificationService --> RoadMate : SMS/Email Success/Failure
+
+RoadMate --> CloudStorage : User Data Backup,\nImage Storage
+RoadMate --> CloudStorage : Application Logs,\nDatabase Backups
+
+CloudStorage --> RoadMate : Stored Data Retrieval,\nBackup Confirmation
+CloudStorage --> RoadMate : Storage Status,\nData Sync
+
+note right of RoadMate
+  Core System Components:
+  • Mobile App (Flutter/Dart)
+  • Backend APIs (Node.js/Express.js)
+  • PostgreSQL Database with PostGIS
+  • Real-time Communication
+  • Security & Authentication
+end note
+
+note left of Users
+  Target User Types:
+  • Motorbike Riders
+  • Personal Car Drivers
+  • Truck/Commercial Vehicle Drivers
+  • Tourists & Long-distance Travelers
+end note
+
+note right of Providers
+  Service Provider Types:
+  • Motorbike Repair Shops
+  • Car Garages
+  • Professional Rescue Teams
+  • Individual Service Providers
+end note
+
+@enduml
